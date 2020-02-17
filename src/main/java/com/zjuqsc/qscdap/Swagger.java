@@ -15,25 +15,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Configuration //标记配置类
-@EnableSwagger2 //开启在线接口文档
+@Configuration
+@EnableSwagger2
 public class Swagger {
-    /**
-     * 添加摘要信息(Docket)
-     */
+
     @Bean
     public Docket controllerApi() {
-//        ParameterBuilder pb = new ParameterBuilder();
-//        List<Parameter> pars = new ArrayList<>();
-//        pb.name("uid").description("uid").modelRef(new ModelRef("string")).parameterType("header").required(false).build();
-//        pars.add(pb.build());
-//        pb.name("token").description("token").modelRef(new ModelRef("string")).parameterType("header").required(false).build();
-//        pars.add(pb.build());
+
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(new ApiInfoBuilder()
-                        .title("标题：")
-                        .description("描述：")
-                        .version("版本号:1.0")
+                        .title("標題：")
+                        .description("説明：")
+                        .version("版本:1.0")
                         .build())
                 .groupName("/")
                 .select()
@@ -57,7 +50,6 @@ public class Swagger {
         securityContexts.add(
                 SecurityContext.builder()
                         .securityReferences(defaultAuth())
-                        //        .forPaths(PathSelectors.regex("^(?!login).*$ | ^(?!error).*$"))
                         .build());
         return securityContexts;
     }
