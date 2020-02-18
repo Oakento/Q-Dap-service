@@ -33,12 +33,14 @@ public interface OrderMapper {
 
     @Insert({
         "insert into cls_order (id, create_time, ",
-        "update_time, user, ",
+        "update_time, expire_time, ",
+        "is_expired, is_finished, user_id, ",
         "express_station, express_company, ",
         "shelf_number, tracking_number, ",
         "remarks)",
         "values (#{id,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
-        "#{updateTime,jdbcType=TIMESTAMP}, #{user,jdbcType=VARCHAR}, ",
+        "#{updateTime,jdbcType=TIMESTAMP}, #{expireTime,jdbcType=TIMESTAMP}, ",
+        "#{isExpired,jdbcType=BIT}, #{isFinished,jdbcType=BIT}, #{userId,jdbcType=VARCHAR}, ",
         "#{expressStation,jdbcType=VARCHAR}, #{expressCompany,jdbcType=VARCHAR}, ",
         "#{shelfNumber,jdbcType=VARCHAR}, #{trackingNumber,jdbcType=VARCHAR}, ",
         "#{remarks,jdbcType=VARCHAR})"
@@ -53,7 +55,10 @@ public interface OrderMapper {
         @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="user", property="user", jdbcType=JdbcType.VARCHAR),
+        @Result(column="expire_time", property="expireTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="is_expired", property="isExpired", jdbcType=JdbcType.BIT),
+        @Result(column="is_finished", property="isFinished", jdbcType=JdbcType.BIT),
+        @Result(column="user_id", property="userId", jdbcType=JdbcType.VARCHAR),
         @Result(column="express_station", property="expressStation", jdbcType=JdbcType.VARCHAR),
         @Result(column="express_company", property="expressCompany", jdbcType=JdbcType.VARCHAR),
         @Result(column="shelf_number", property="shelfNumber", jdbcType=JdbcType.VARCHAR),
@@ -64,8 +69,8 @@ public interface OrderMapper {
 
     @Select({
         "select",
-        "id, create_time, update_time, user, express_station, express_company, shelf_number, ",
-        "tracking_number, remarks",
+        "id, create_time, update_time, expire_time, is_expired, is_finished, user_id, ",
+        "express_station, express_company, shelf_number, tracking_number, remarks",
         "from cls_order",
         "where id = #{id,jdbcType=VARCHAR}"
     })
@@ -73,7 +78,10 @@ public interface OrderMapper {
         @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="user", property="user", jdbcType=JdbcType.VARCHAR),
+        @Result(column="expire_time", property="expireTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="is_expired", property="isExpired", jdbcType=JdbcType.BIT),
+        @Result(column="is_finished", property="isFinished", jdbcType=JdbcType.BIT),
+        @Result(column="user_id", property="userId", jdbcType=JdbcType.VARCHAR),
         @Result(column="express_station", property="expressStation", jdbcType=JdbcType.VARCHAR),
         @Result(column="express_company", property="expressCompany", jdbcType=JdbcType.VARCHAR),
         @Result(column="shelf_number", property="shelfNumber", jdbcType=JdbcType.VARCHAR),
@@ -95,7 +103,10 @@ public interface OrderMapper {
         "update cls_order",
         "set create_time = #{createTime,jdbcType=TIMESTAMP},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
-          "user = #{user,jdbcType=VARCHAR},",
+          "expire_time = #{expireTime,jdbcType=TIMESTAMP},",
+          "is_expired = #{isExpired,jdbcType=BIT},",
+          "is_finished = #{isFinished,jdbcType=BIT},",
+          "user_id = #{userId,jdbcType=VARCHAR},",
           "express_station = #{expressStation,jdbcType=VARCHAR},",
           "express_company = #{expressCompany,jdbcType=VARCHAR},",
           "shelf_number = #{shelfNumber,jdbcType=VARCHAR},",

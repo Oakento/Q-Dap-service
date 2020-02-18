@@ -9,7 +9,13 @@ public class Order {
 
     private Date updateTime;
 
-    private String user;
+    private Date expireTime;
+
+    private Boolean isExpired;
+
+    private Boolean isFinished;
+
+    private String userId;
 
     private String expressStation;
 
@@ -45,12 +51,36 @@ public class Order {
         this.updateTime = updateTime;
     }
 
-    public String getUser() {
-        return user;
+    public Date getExpireTime() {
+        return expireTime;
     }
 
-    public void setUser(String user) {
-        this.user = user == null ? null : user.trim();
+    public void setExpireTime(Date expireTime) {
+        this.expireTime = expireTime;
+    }
+
+    public Boolean getIsExpired() {
+        return isExpired;
+    }
+
+    public void setIsExpired(Boolean isExpired) {
+        this.isExpired = isExpired;
+    }
+
+    public Boolean getIsFinished() {
+        return isFinished;
+    }
+
+    public void setIsFinished(Boolean isFinished) {
+        this.isFinished = isFinished;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
     public String getExpressStation() {

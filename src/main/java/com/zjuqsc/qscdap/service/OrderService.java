@@ -6,6 +6,8 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @MapperScan(basePackages = {"com.zjuqsc.qscdap.mapper"})
 public class OrderService {
@@ -13,8 +15,10 @@ public class OrderService {
     @Autowired
     OrderMapper orderMapper;
 
+    
     public Order getOrder(String orderId) {
         return this.orderMapper.selectByPrimaryKey(orderId);
     }
+
 
 }

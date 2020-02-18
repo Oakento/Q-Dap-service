@@ -40,8 +40,20 @@ public class OrderSqlProvider {
             sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getUser() != null) {
-            sql.VALUES("user", "#{user,jdbcType=VARCHAR}");
+        if (record.getExpireTime() != null) {
+            sql.VALUES("expire_time", "#{expireTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getIsExpired() != null) {
+            sql.VALUES("is_expired", "#{isExpired,jdbcType=BIT}");
+        }
+        
+        if (record.getIsFinished() != null) {
+            sql.VALUES("is_finished", "#{isFinished,jdbcType=BIT}");
+        }
+        
+        if (record.getUserId() != null) {
+            sql.VALUES("user_id", "#{userId,jdbcType=VARCHAR}");
         }
         
         if (record.getExpressStation() != null) {
@@ -76,7 +88,10 @@ public class OrderSqlProvider {
         }
         sql.SELECT("create_time");
         sql.SELECT("update_time");
-        sql.SELECT("user");
+        sql.SELECT("expire_time");
+        sql.SELECT("is_expired");
+        sql.SELECT("is_finished");
+        sql.SELECT("user_id");
         sql.SELECT("express_station");
         sql.SELECT("express_company");
         sql.SELECT("shelf_number");
@@ -111,8 +126,20 @@ public class OrderSqlProvider {
             sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getUser() != null) {
-            sql.SET("user = #{record.user,jdbcType=VARCHAR}");
+        if (record.getExpireTime() != null) {
+            sql.SET("expire_time = #{record.expireTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getIsExpired() != null) {
+            sql.SET("is_expired = #{record.isExpired,jdbcType=BIT}");
+        }
+        
+        if (record.getIsFinished() != null) {
+            sql.SET("is_finished = #{record.isFinished,jdbcType=BIT}");
+        }
+        
+        if (record.getUserId() != null) {
+            sql.SET("user_id = #{record.userId,jdbcType=VARCHAR}");
         }
         
         if (record.getExpressStation() != null) {
@@ -146,7 +173,10 @@ public class OrderSqlProvider {
         sql.SET("id = #{record.id,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
-        sql.SET("user = #{record.user,jdbcType=VARCHAR}");
+        sql.SET("expire_time = #{record.expireTime,jdbcType=TIMESTAMP}");
+        sql.SET("is_expired = #{record.isExpired,jdbcType=BIT}");
+        sql.SET("is_finished = #{record.isFinished,jdbcType=BIT}");
+        sql.SET("user_id = #{record.userId,jdbcType=VARCHAR}");
         sql.SET("express_station = #{record.expressStation,jdbcType=VARCHAR}");
         sql.SET("express_company = #{record.expressCompany,jdbcType=VARCHAR}");
         sql.SET("shelf_number = #{record.shelfNumber,jdbcType=VARCHAR}");
@@ -170,8 +200,20 @@ public class OrderSqlProvider {
             sql.SET("update_time = #{updateTime,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getUser() != null) {
-            sql.SET("user = #{user,jdbcType=VARCHAR}");
+        if (record.getExpireTime() != null) {
+            sql.SET("expire_time = #{expireTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getIsExpired() != null) {
+            sql.SET("is_expired = #{isExpired,jdbcType=BIT}");
+        }
+        
+        if (record.getIsFinished() != null) {
+            sql.SET("is_finished = #{isFinished,jdbcType=BIT}");
+        }
+        
+        if (record.getUserId() != null) {
+            sql.SET("user_id = #{userId,jdbcType=VARCHAR}");
         }
         
         if (record.getExpressStation() != null) {
