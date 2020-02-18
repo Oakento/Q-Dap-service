@@ -15,10 +15,20 @@ public class OrderService {
     @Autowired
     OrderMapper orderMapper;
 
-    
+    public List<Order> getOrderByStatus(Boolean is_expired, Boolean is_finished){
+
+        return this.orderMapper.selectByStatus(is_expired, is_finished);
+    }
+
+    public List<Order> getOrderByUserId(String userId) {
+        return this.orderMapper.selectByUserId(userId);
+    }
+
     public Order getOrder(String orderId) {
         return this.orderMapper.selectByPrimaryKey(orderId);
     }
+
+    
 
 
 }

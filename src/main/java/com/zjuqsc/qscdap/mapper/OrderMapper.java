@@ -15,7 +15,9 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface OrderMapper {
     @SelectProvider(type=OrderSqlProvider.class, method="countByExample")
     long countByExample(OrderCriteria example);
@@ -90,16 +92,16 @@ public interface OrderMapper {
     })
     Order selectByPrimaryKey(String id);
 
-    // GET ORDER BY PAGE
+    // GET ORDER BY STATUS
     @Select({
             "select",
             "id, create_time, update_time, expire_time, is_expired, is_finished, user_id, ",
             "express_station, express_company, shelf_number, tracking_number, remarks",
             "from cls_order",
             "order by",
-            "create_time",
-            "where is_expired = #{is_expired,jdbcType=BIT} and is_finished = #{is_finished,jdbcType=BIT}",
-            "limit #{index}, #{pageSize}"
+            "create_time Desc",
+            "where is_expired = #{is_expired,jdbcType=BIT} and is_finished = #{is_finished,jdbcType=BIT}"
+            //"limit #{index}, #{pageSize}"
     })
     @Results({
             @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
@@ -116,7 +118,35 @@ public interface OrderMapper {
             @Result(column="remarks", property="remarks", jdbcType=JdbcType.VARCHAR),
             @Result(column="order_taker_id", property="orderTakerId", jdbcType=JdbcType.VARCHAR)
     })
-    List<Order> selectPageByStatus(Boolean is_expired, Boolean is_finished, int index, int pageSize);
+//    List<Order> selectByStatusInPage(Boolean is_expired, Boolean is_finished, int index, int pageSize);
+    List<Order> selectByStatus(Boolean is_expired, Boolean is_finished);
+
+    // GET ORDER BY USER
+    @Select({
+        "select",
+        "id, create_time, update_time, expire_time, is_expired, is_finished, user_id, ",
+        "express_station, express_company, shelf_number, tracking_number, remarks",
+        "from cls_order",
+        "order by",
+        "create_time Desc",
+        "where user_id = #{user_id,jdbcType=VARCHAR}"
+    })
+    @Results({
+            @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
+            @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="expire_time", property="expireTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="is_expired", property="isExpired", jdbcType=JdbcType.BIT),
+            @Result(column="is_finished", property="isFinished", jdbcType=JdbcType.BIT),
+            @Result(column="user_id", property="userId", jdbcType=JdbcType.VARCHAR),
+            @Result(column="express_station", property="expressStation", jdbcType=JdbcType.VARCHAR),
+            @Result(column="express_company", property="expressCompany", jdbcType=JdbcType.VARCHAR),
+            @Result(column="shelf_number", property="shelfNumber", jdbcType=JdbcType.VARCHAR),
+            @Result(column="tracking_number", property="trackingNumber", jdbcType=JdbcType.VARCHAR),
+            @Result(column="remarks", property="remarks", jdbcType=JdbcType.VARCHAR),
+            @Result(column="order_taker_id", property="orderTakerId", jdbcType=JdbcType.VARCHAR)
+    })
+    List<Order> selectByUserId(String userId);
 
     @UpdateProvider(type=OrderSqlProvider.class, method="updateByExampleSelective")
     int updateByExampleSelective(@Param("record") Order record, @Param("example") OrderCriteria example);
