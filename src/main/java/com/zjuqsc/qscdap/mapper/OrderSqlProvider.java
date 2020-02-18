@@ -76,6 +76,10 @@ public class OrderSqlProvider {
             sql.VALUES("remarks", "#{remarks,jdbcType=VARCHAR}");
         }
         
+        if (record.getOrderTakerId() != null) {
+            sql.VALUES("order_taker_id", "#{orderTakerId,jdbcType=VARCHAR}");
+        }
+        
         return sql.toString();
     }
 
@@ -97,6 +101,7 @@ public class OrderSqlProvider {
         sql.SELECT("shelf_number");
         sql.SELECT("tracking_number");
         sql.SELECT("remarks");
+        sql.SELECT("order_taker_id");
         sql.FROM("cls_order");
         applyWhere(sql, example, false);
         
@@ -162,6 +167,10 @@ public class OrderSqlProvider {
             sql.SET("remarks = #{record.remarks,jdbcType=VARCHAR}");
         }
         
+        if (record.getOrderTakerId() != null) {
+            sql.SET("order_taker_id = #{record.orderTakerId,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -182,6 +191,7 @@ public class OrderSqlProvider {
         sql.SET("shelf_number = #{record.shelfNumber,jdbcType=VARCHAR}");
         sql.SET("tracking_number = #{record.trackingNumber,jdbcType=VARCHAR}");
         sql.SET("remarks = #{record.remarks,jdbcType=VARCHAR}");
+        sql.SET("order_taker_id = #{record.orderTakerId,jdbcType=VARCHAR}");
         
         OrderCriteria example = (OrderCriteria) parameter.get("example");
         applyWhere(sql, example, true);
@@ -234,6 +244,10 @@ public class OrderSqlProvider {
         
         if (record.getRemarks() != null) {
             sql.SET("remarks = #{remarks,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getOrderTakerId() != null) {
+            sql.SET("order_taker_id = #{orderTakerId,jdbcType=VARCHAR}");
         }
         
         sql.WHERE("id = #{id,jdbcType=VARCHAR}");
