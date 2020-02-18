@@ -894,6 +894,76 @@ public class OrderCriteria {
             addCriterion("remarks not between", value1, value2, "remarks");
             return (Criteria) this;
         }
+
+        public Criteria andOrderTakerIdIsNull() {
+            addCriterion("order_taker_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderTakerIdIsNotNull() {
+            addCriterion("order_taker_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderTakerIdEqualTo(String value) {
+            addCriterion("order_taker_id =", value, "orderTakerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderTakerIdNotEqualTo(String value) {
+            addCriterion("order_taker_id <>", value, "orderTakerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderTakerIdGreaterThan(String value) {
+            addCriterion("order_taker_id >", value, "orderTakerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderTakerIdGreaterThanOrEqualTo(String value) {
+            addCriterion("order_taker_id >=", value, "orderTakerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderTakerIdLessThan(String value) {
+            addCriterion("order_taker_id <", value, "orderTakerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderTakerIdLessThanOrEqualTo(String value) {
+            addCriterion("order_taker_id <=", value, "orderTakerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderTakerIdLike(String value) {
+            addCriterion("order_taker_id like", value, "orderTakerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderTakerIdNotLike(String value) {
+            addCriterion("order_taker_id not like", value, "orderTakerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderTakerIdIn(List<String> values) {
+            addCriterion("order_taker_id in", values, "orderTakerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderTakerIdNotIn(List<String> values) {
+            addCriterion("order_taker_id not in", values, "orderTakerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderTakerIdBetween(String value1, String value2) {
+            addCriterion("order_taker_id between", value1, value2, "orderTakerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderTakerIdNotBetween(String value1, String value2) {
+            addCriterion("order_taker_id not between", value1, value2, "orderTakerId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

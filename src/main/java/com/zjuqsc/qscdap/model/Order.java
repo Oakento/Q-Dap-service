@@ -27,6 +27,8 @@ public class Order {
 
     private String remarks;
 
+    private String orderTakerId;
+
     public String getId() {
         return id;
     }
@@ -121,5 +123,13 @@ public class Order {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks == null ? null : remarks.trim();
+    }
+
+    public String getOrderTakerId() {
+        return orderTakerId;
+    }
+
+    public void setOrderTakerId(String orderTakerId) {
+        this.orderTakerId = orderTakerId == null ? null : orderTakerId.trim();
     }
 }
