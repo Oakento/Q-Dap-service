@@ -3,6 +3,7 @@ package com.zjuqsc.qscdap.service;
 import com.zjuqsc.qscdap.mapper.OrderMapper;
 import com.zjuqsc.qscdap.model.Order;
 import com.zjuqsc.qscdap.model.OrderCriteria;
+import com.zjuqsc.qscdap.util.SnowFlake;
 import com.zjuqsc.qscdap.util.TimeUtils;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,6 +111,10 @@ public class OrderService {
         order.setOrderTakerId(orderTakerId);
         this.orderMapper.updateByPrimaryKeySelective(order);
         return order;
+    }
+
+    public String generateOrderId() {
+        return Long.toString(new SnowFlake(0, 0).nextId());
     }
 
 }
