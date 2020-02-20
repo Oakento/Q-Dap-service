@@ -23,6 +23,7 @@ public class OrderController {
     @ApiOperation(value = "Post an order")
     @ResponseBody
     public HashMap<String, Object> newOrder(
+            @ApiParam(required = true, value = "User Id") @RequestParam(required = true) String userId,
             @ApiParam(required = true, value = "Express station") @RequestParam(required = true) String expressStation,
             @ApiParam(required = true, value = "Express company") @RequestParam(required = true) String expressCompany,
             @ApiParam(required = true, value = "Shelf number") @RequestParam(required = true) String shelfNumber,
@@ -37,6 +38,7 @@ public class OrderController {
         order.setCreateTime(now);
         order.setIsExpired(false);
         order.setIsFinished(false);
+        order.setUserId(userId);
         order.setExpressStation(expressStation);
         order.setExpressCompany(expressCompany);
         order.setShelfNumber(shelfNumber);
