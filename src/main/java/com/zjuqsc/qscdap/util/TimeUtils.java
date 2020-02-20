@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-public class TimeCalculator {
+public class TimeUtils {
 
     public static boolean isExpired(Date expireTime) {
         Date now = new Date();
