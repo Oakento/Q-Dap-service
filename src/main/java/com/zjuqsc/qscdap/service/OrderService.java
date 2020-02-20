@@ -9,6 +9,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -47,70 +48,92 @@ public class OrderService {
         return this.orderMapper.deleteByPrimaryKey(orderId);
     }
 
-    public Order setOrderExpireTime(String orderId, int daysToExpire) {
+    public int setOrderExpireTime(String orderId, int daysToExpire) {
 
         Order order = this.getOrder(orderId);
         order.setExpireTime(
                 TimeUtils.addDays(order.getCreateTime(), daysToExpire));
-        this.orderMapper.updateByPrimaryKeySelective(order);
-        return order;
+
+        return this.orderMapper.updateByPrimaryKeySelective(order);
     }
 
-    public Order setOrderIsExpired(String orderId) {
+    public int setOrderUpdateTime(String orderId) {
+        Date now = new Date();
         Order order = this.getOrder(orderId);
-        order.setIsExpired(
-                TimeUtils.isExpired(order.getExpireTime()));
-        this.orderMapper.updateByPrimaryKeySelective(order);
-        return order;
+        order.setUpdateTime(now);
+
+        return this.orderMapper.updateByPrimaryKeySelective(order);
     }
 
-    public Order setOrderIsFinished(String orderId, boolean isFinished) {
+    public int setOrderIsFinished(String orderId, boolean isFinished) {
         Order order = this.getOrder(orderId);
         order.setIsFinished(isFinished);
-        this.orderMapper.updateByPrimaryKeySelective(order);
-        return order;
+
+        return this.orderMapper.updateByPrimaryKeySelective(order);
     }
 
-    public Order setOrderExpressStation(String orderId, String expressStation) {
+    public int setOrderExpressStation(String orderId, String expressStation) {
         Order order = this.getOrder(orderId);
-        order.setExpressStation(expressStation);
-        this.orderMapper.updateByPrimaryKeySelective(order);
-        return order;
+        if (order.getExpressStation().equals(expressStation))
+            return 0;
+        else {
+            order.setExpressStation(expressStation);
+            return this.orderMapper.updateByPrimaryKeySelective(order);
+        }
     }
 
-    public Order setOrderExpressCompany(String orderId, String expressCompany) {
+    public int setOrderExpressCompany(String orderId, String expressCompany) {
         Order order = this.getOrder(orderId);
-        order.setExpressCompany(expressCompany);
-        this.orderMapper.updateByPrimaryKeySelective(order);
-        return order;
+        if (order.getExpressCompany().equals(expressCompany))
+            return 0;
+        else {
+            order.setExpressCompany(expressCompany);
+            return this.orderMapper.updateByPrimaryKeySelective(order);
+        }
     }
 
-    public Order setOrderShelfNumber(String orderId, String shelfNumber) {
+    public int setOrderShelfNumber(String orderId, String shelfNumber) {
         Order order = this.getOrder(orderId);
-        order.setShelfNumber(shelfNumber);
-        this.orderMapper.updateByPrimaryKeySelective(order);
-        return order;
+        if (order.getShelfNumber().equals(shelfNumber))
+            return 0;
+        else {
+            order.setShelfNumber(shelfNumber);
+            return this.orderMapper.updateByPrimaryKeySelective(order);
+        }
     }
 
-    public Order setOrderTrackingNumber(String orderId, String trackingNumber) {
+
+    public int setOrderTrackingNumber(String orderId, String trackingNumber) {
         Order order = this.getOrder(orderId);
-        order.setTrackingNumber(trackingNumber);
-        this.orderMapper.updateByPrimaryKeySelective(order);
-        return order;
+        String currentTrackingNumber = order.getTrackingNumber();
+        if (currentTrackingNumber == null && trackingNumber == null)
+            return 0;
+        else if (currentTrackingNumber != null && currentTrackingNumber.equals(trackingNumber))
+            return 0;
+        else {
+            order.setTrackingNumber(trackingNumber);
+            return this.orderMapper.updateByPrimaryKeySelective(order);
+        }
     }
 
-    public Order setOrderRemarks(String orderId, String remarks) {
+    public int setOrderRemarks(String orderId, String remarks) {
         Order order = this.getOrder(orderId);
-        order.setRemarks(remarks);
-        this.orderMapper.updateByPrimaryKeySelective(order);
-        return order;
+        String currentRemarks = order.getRemarks();
+        if (currentRemarks == null && remarks == null)
+            return 0;
+        else if (currentRemarks != null && order.getRemarks().equals(remarks))
+            return 0;
+        else {
+            order.setRemarks(remarks);
+            return this.orderMapper.updateByPrimaryKeySelective(order);
+        }
     }
 
-    public Order setOrderOrderTakerId(String orderId, String orderTakerId) {
+    public int setOrderOrderTakerId(String orderId, String orderTakerId) {
         Order order = this.getOrder(orderId);
         order.setOrderTakerId(orderTakerId);
-        this.orderMapper.updateByPrimaryKeySelective(order);
-        return order;
+
+        return this.orderMapper.updateByPrimaryKeySelective(order);
     }
 
     public String generateOrderId() {
