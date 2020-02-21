@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 
 @RestController
@@ -102,6 +103,28 @@ public class OrderController {
         map.put("code", updatedField);
         map.put("message", message);
         map.put("data", order);
+
+        return map;
+    }
+
+    @RequestMapping(value = "/order/getAll",method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ApiOperation(value = "Get all order")
+    @ResponseBody
+    public HashMap<String, Object> getAllOrder() {
+        List<Order> activeOrder = this.orderService.getOrderByStatus(false, false);
+        List<Order> finishedOrder = this.orderService.getOrderByStatus(false, true);
+        List<Order> expiredOrder = this.orderService.getOrderByStatus(true, false);
+
+        HashMap<String, Object> orderMap = new HashMap<String, Object>();
+        HashMap<String, Object> map = new HashMap<String, Object>();
+
+        orderMap.put("activeOrder", activeOrder);
+        orderMap.put("finishedOrder", finishedOrder);
+        orderMap.put("expiredOrder", expiredOrder);
+
+        map.put("code", 1);
+        map.put("message", "success");
+        map.put("data", orderMap);
 
         return map;
     }
