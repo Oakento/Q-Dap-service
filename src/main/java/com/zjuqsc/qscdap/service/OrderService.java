@@ -36,6 +36,18 @@ public class OrderService {
         return this.orderMapper.selectByExample(orderCriteria);
     }
 
+    public List<Order> getOrderByUserIdAndStatus(String userId, Boolean isExpired, Boolean isFinished) {
+        OrderCriteria orderCriteria = new OrderCriteria();
+        orderCriteria.createCriteria()
+                .andUserIdEqualTo(userId)
+                .andIsExpiredEqualTo(isExpired)
+                .andIsFinishedEqualTo(isFinished);
+        orderCriteria.setOrderByClause("create_time desc");
+
+        return this.orderMapper.selectByExample(orderCriteria);
+    }
+
+
     public Order getOrder(String orderId) {
         return this.orderMapper.selectByPrimaryKey(orderId);
     }
@@ -72,6 +84,12 @@ public class OrderService {
         return this.orderMapper.updateByPrimaryKeySelective(order);
     }
 
+    public int setOrderIsConfirmed(String orderId, boolean isConfirmed) {
+        Order order = this.getOrder(orderId);
+        order.setIsConfirmed(isConfirmed);
+
+        return this.orderMapper.updateByPrimaryKeySelective(order);
+    }
     public int setOrderExpressStation(String orderId, String expressStation) {
         Order order = this.getOrder(orderId);
         if (order.getExpressStation().equals(expressStation))

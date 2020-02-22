@@ -129,4 +129,130 @@ public class OrderController {
         return map;
     }
 
+    @RequestMapping(value = "/order",method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ApiOperation(value = "Get order")
+    @ResponseBody
+    public HashMap<String, Object> getOrder(
+            @ApiParam(required = true, value = "Order Id") @RequestParam(required = true) String orderId
+    ) {
+        Order order = this.orderService.getOrder(orderId);
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 1);
+        map.put("message", "success");
+        map.put("data", order);
+
+        return map;
+    }
+
+    @RequestMapping(value = "/order/user",method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ApiOperation(value = "Get user's order")
+    @ResponseBody
+    public HashMap<String, Object> getOrderByUser(
+            @ApiParam(required = true, value = "User Id") @RequestParam(required = true) String userId
+    ) {
+        // List<Order> userOrder = this.orderService.getOrderByUserId(userId);
+
+        List<Order> userActiveOrder = this.orderService.getOrderByUserIdAndStatus(userId, false, false);
+        List<Order> userFinishedOrder = this.orderService.getOrderByUserIdAndStatus(userId,false, true);
+        List<Order> userExpiredOrder = this.orderService.getOrderByUserIdAndStatus(userId, true, false);
+
+        HashMap<String, Object> userOrderMap = new HashMap<String, Object>();
+        HashMap<String, Object> map = new HashMap<String, Object>();
+
+        userOrderMap.put("activeOrder", userActiveOrder);
+        userOrderMap.put("finishedOrder", userFinishedOrder);
+        userOrderMap.put("expiredOrder", userExpiredOrder);
+
+        map.put("code", 1);
+        map.put("message", "success");
+        map.put("data", userOrderMap);
+
+        return map;
+    }
+
+    @RequestMapping(value = "/order/take",method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ApiOperation(value = "Take order")
+    @ResponseBody
+    public HashMap<String, Object> takeOrder(
+            @ApiParam(required = true, value = "User Id") @RequestParam(required = true) String userId,
+            @ApiParam(required = true, value = "Order Id") @RequestParam(required = true) String orderId
+    ) {
+        int code;
+        String message;
+        Order order = this.orderService.getOrder(orderId);
+        // User user = this.userService.getUser(userId);
+        if (order.getUserId().equals(userId)) {
+            code = 0;
+            message = "not permitted";
+        }
+        else {
+            code = this.orderService.setOrderOrderTakerId(orderId, userId);
+            message = (code > 0) ? "success" : "failed";
+            order = this.orderService.getOrder(orderId);
+        }
+
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("code", code);
+        map.put("message", message);
+        map.put("data", order);
+
+        return map;
+    }
+
+    @RequestMapping(value = "/order/finish",method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ApiOperation(value = "Finish order")
+    @ResponseBody
+    public HashMap<String, Object> finishOrder(
+            @ApiParam(required = true, value = "User Id") @RequestParam(required = true) String userId,
+            @ApiParam(required = true, value = "Order Id") @RequestParam(required = true) String orderId
+    ) {
+        int code;
+        String message;
+        Order order = this.orderService.getOrder(orderId);
+        if (!order.getUserId().equals(userId) &&
+                (order.getOrderTakerId() == null || !order.getOrderTakerId().equals(userId))) {
+            code = 0;
+            message = "not permitted";
+        }
+        else{
+            code = this.orderService.setOrderIsFinished(orderId, true);
+            message = (code > 0) ? "success" : "failed";
+            order = this.orderService.getOrder(orderId);
+        }
+
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("code", code);
+        map.put("message", message);
+        map.put("data", order);
+
+        return map;
+    }
+
+    @RequestMapping(value = "/order/confirm",method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ApiOperation(value = "confirm order taker")
+    @ResponseBody
+    public HashMap<String, Object> confirmOrderTaker(
+            @ApiParam(required = true, value = "User Id") @RequestParam(required = true) String userId,
+            @ApiParam(required = true, value = "Order Id") @RequestParam(required = true) String orderId
+    ) {
+        int code;
+        String message;
+        Order order = this.orderService.getOrder(orderId);
+        if (!order.getUserId().equals(userId) || order.getOrderTakerId() == null){
+            code = 0;
+            message = "not permitted";
+        }
+        else {
+            code = this.orderService.setOrderIsConfirmed(orderId, true);
+            message = (code > 0) ? "success" : "failed";
+            order = this.orderService.getOrder(orderId);
+        }
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("code", code);
+        map.put("message", message);
+        map.put("data", order);
+
+        return map;
+    }
+
 }

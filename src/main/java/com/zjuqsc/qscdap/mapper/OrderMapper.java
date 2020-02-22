@@ -15,9 +15,7 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface OrderMapper {
     @SelectProvider(type=OrderSqlProvider.class, method="countByExample")
     long countByExample(OrderCriteria example);
@@ -34,16 +32,18 @@ public interface OrderMapper {
     @Insert({
         "insert into cls_order (id, create_time, ",
         "update_time, expire_time, ",
-        "is_expired, is_finished, user_id, ",
-        "express_station, express_company, ",
-        "shelf_number, tracking_number, ",
-        "remarks, order_taker_id)",
+        "is_expired, is_finished, is_confirmed, ",
+        "user_id, express_station, ",
+        "express_company, shelf_number, ",
+        "tracking_number, remarks, ",
+        "order_taker_id)",
         "values (#{id,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
         "#{updateTime,jdbcType=TIMESTAMP}, #{expireTime,jdbcType=TIMESTAMP}, ",
-        "#{isExpired,jdbcType=BIT}, #{isFinished,jdbcType=BIT}, #{userId,jdbcType=VARCHAR}, ",
-        "#{expressStation,jdbcType=VARCHAR}, #{expressCompany,jdbcType=VARCHAR}, ",
-        "#{shelfNumber,jdbcType=VARCHAR}, #{trackingNumber,jdbcType=VARCHAR}, ",
-        "#{remarks,jdbcType=VARCHAR}, #{orderTakerId,jdbcType=VARCHAR})"
+        "#{isExpired,jdbcType=BIT}, #{isFinished,jdbcType=BIT}, #{isConfirmed,jdbcType=BIT}, ",
+        "#{userId,jdbcType=VARCHAR}, #{expressStation,jdbcType=VARCHAR}, ",
+        "#{expressCompany,jdbcType=VARCHAR}, #{shelfNumber,jdbcType=VARCHAR}, ",
+        "#{trackingNumber,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, ",
+        "#{orderTakerId,jdbcType=VARCHAR})"
     })
     int insert(Order record);
 
@@ -58,6 +58,7 @@ public interface OrderMapper {
         @Result(column="expire_time", property="expireTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="is_expired", property="isExpired", jdbcType=JdbcType.BIT),
         @Result(column="is_finished", property="isFinished", jdbcType=JdbcType.BIT),
+        @Result(column="is_confirmed", property="isConfirmed", jdbcType=JdbcType.BIT),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.VARCHAR),
         @Result(column="express_station", property="expressStation", jdbcType=JdbcType.VARCHAR),
         @Result(column="express_company", property="expressCompany", jdbcType=JdbcType.VARCHAR),
@@ -70,8 +71,9 @@ public interface OrderMapper {
 
     @Select({
         "select",
-        "id, create_time, update_time, expire_time, is_expired, is_finished, user_id, ",
-        "express_station, express_company, shelf_number, tracking_number, remarks, order_taker_id",
+        "id, create_time, update_time, expire_time, is_expired, is_finished, is_confirmed, ",
+        "user_id, express_station, express_company, shelf_number, tracking_number, remarks, ",
+        "order_taker_id",
         "from cls_order",
         "where id = #{id,jdbcType=VARCHAR}"
     })
@@ -82,6 +84,7 @@ public interface OrderMapper {
         @Result(column="expire_time", property="expireTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="is_expired", property="isExpired", jdbcType=JdbcType.BIT),
         @Result(column="is_finished", property="isFinished", jdbcType=JdbcType.BIT),
+        @Result(column="is_confirmed", property="isConfirmed", jdbcType=JdbcType.BIT),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.VARCHAR),
         @Result(column="express_station", property="expressStation", jdbcType=JdbcType.VARCHAR),
         @Result(column="express_company", property="expressCompany", jdbcType=JdbcType.VARCHAR),
@@ -108,6 +111,7 @@ public interface OrderMapper {
           "expire_time = #{expireTime,jdbcType=TIMESTAMP},",
           "is_expired = #{isExpired,jdbcType=BIT},",
           "is_finished = #{isFinished,jdbcType=BIT},",
+          "is_confirmed = #{isConfirmed,jdbcType=BIT},",
           "user_id = #{userId,jdbcType=VARCHAR},",
           "express_station = #{expressStation,jdbcType=VARCHAR},",
           "express_company = #{expressCompany,jdbcType=VARCHAR},",

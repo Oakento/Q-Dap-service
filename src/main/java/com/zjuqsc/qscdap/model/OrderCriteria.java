@@ -475,6 +475,66 @@ public class OrderCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andIsConfirmedIsNull() {
+            addCriterion("is_confirmed is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedIsNotNull() {
+            addCriterion("is_confirmed is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedEqualTo(Boolean value) {
+            addCriterion("is_confirmed =", value, "isConfirmed");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedNotEqualTo(Boolean value) {
+            addCriterion("is_confirmed <>", value, "isConfirmed");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedGreaterThan(Boolean value) {
+            addCriterion("is_confirmed >", value, "isConfirmed");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("is_confirmed >=", value, "isConfirmed");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedLessThan(Boolean value) {
+            addCriterion("is_confirmed <", value, "isConfirmed");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedLessThanOrEqualTo(Boolean value) {
+            addCriterion("is_confirmed <=", value, "isConfirmed");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedIn(List<Boolean> values) {
+            addCriterion("is_confirmed in", values, "isConfirmed");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedNotIn(List<Boolean> values) {
+            addCriterion("is_confirmed not in", values, "isConfirmed");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_confirmed between", value1, value2, "isConfirmed");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_confirmed not between", value1, value2, "isConfirmed");
+            return (Criteria) this;
+        }
+
         public Criteria andUserIdIsNull() {
             addCriterion("user_id is null");
             return (Criteria) this;

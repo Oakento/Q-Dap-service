@@ -15,6 +15,8 @@ public class Order {
 
     private Boolean isFinished;
 
+    private Boolean isConfirmed;
+
     private String userId;
 
     private String expressStation;
@@ -75,6 +77,14 @@ public class Order {
 
     public void setIsFinished(Boolean isFinished) {
         this.isFinished = isFinished;
+    }
+
+    public Boolean getIsConfirmed() {
+        return isConfirmed;
+    }
+
+    public void setIsConfirmed(Boolean isConfirmed) {
+        this.isConfirmed = isConfirmed;
     }
 
     public String getUserId() {

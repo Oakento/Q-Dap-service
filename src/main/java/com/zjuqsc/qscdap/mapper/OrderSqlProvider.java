@@ -52,6 +52,10 @@ public class OrderSqlProvider {
             sql.VALUES("is_finished", "#{isFinished,jdbcType=BIT}");
         }
         
+        if (record.getIsConfirmed() != null) {
+            sql.VALUES("is_confirmed", "#{isConfirmed,jdbcType=BIT}");
+        }
+        
         if (record.getUserId() != null) {
             sql.VALUES("user_id", "#{userId,jdbcType=VARCHAR}");
         }
@@ -95,6 +99,7 @@ public class OrderSqlProvider {
         sql.SELECT("expire_time");
         sql.SELECT("is_expired");
         sql.SELECT("is_finished");
+        sql.SELECT("is_confirmed");
         sql.SELECT("user_id");
         sql.SELECT("express_station");
         sql.SELECT("express_company");
@@ -143,6 +148,10 @@ public class OrderSqlProvider {
             sql.SET("is_finished = #{record.isFinished,jdbcType=BIT}");
         }
         
+        if (record.getIsConfirmed() != null) {
+            sql.SET("is_confirmed = #{record.isConfirmed,jdbcType=BIT}");
+        }
+        
         if (record.getUserId() != null) {
             sql.SET("user_id = #{record.userId,jdbcType=VARCHAR}");
         }
@@ -185,6 +194,7 @@ public class OrderSqlProvider {
         sql.SET("expire_time = #{record.expireTime,jdbcType=TIMESTAMP}");
         sql.SET("is_expired = #{record.isExpired,jdbcType=BIT}");
         sql.SET("is_finished = #{record.isFinished,jdbcType=BIT}");
+        sql.SET("is_confirmed = #{record.isConfirmed,jdbcType=BIT}");
         sql.SET("user_id = #{record.userId,jdbcType=VARCHAR}");
         sql.SET("express_station = #{record.expressStation,jdbcType=VARCHAR}");
         sql.SET("express_company = #{record.expressCompany,jdbcType=VARCHAR}");
@@ -220,6 +230,10 @@ public class OrderSqlProvider {
         
         if (record.getIsFinished() != null) {
             sql.SET("is_finished = #{isFinished,jdbcType=BIT}");
+        }
+        
+        if (record.getIsConfirmed() != null) {
+            sql.SET("is_confirmed = #{isConfirmed,jdbcType=BIT}");
         }
         
         if (record.getUserId() != null) {
