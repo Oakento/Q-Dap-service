@@ -19,10 +19,64 @@ public class OrderService {
     @Autowired
     OrderMapper orderMapper;
 
-    public List<Order> getOrderByStatus(Boolean isExpired, Boolean isFinished){
+    public List<Order> getAllOrder(){
 
         OrderCriteria orderCriteria = new OrderCriteria();
-        orderCriteria.createCriteria().andIsExpiredEqualTo(isExpired).andIsFinishedEqualTo(isFinished);
+        orderCriteria.setOrderByClause("create_time desc");
+
+        return this.orderMapper.selectByExample(orderCriteria);
+    }
+
+    public List<Order> getActiveOrderList() {
+        OrderCriteria orderCriteria = new OrderCriteria();
+        orderCriteria.createCriteria().andIsExpiredNotEqualTo(true).andIsFinishedNotEqualTo(true);
+        orderCriteria.setOrderByClause("create_time desc");
+
+        return this.orderMapper.selectByExample(orderCriteria);
+    }
+
+    public List<Order> getExpiredOrderList() {
+        OrderCriteria orderCriteria = new OrderCriteria();
+        orderCriteria.createCriteria().andIsExpiredEqualTo(true);
+        orderCriteria.setOrderByClause("create_time desc");
+
+        return this.orderMapper.selectByExample(orderCriteria);
+    }
+
+    public List<Order> getFinishedOrderList() {
+        OrderCriteria orderCriteria = new OrderCriteria();
+        orderCriteria.createCriteria().andIsFinishedEqualTo(true);
+        orderCriteria.setOrderByClause("create_time desc");
+
+        return this.orderMapper.selectByExample(orderCriteria);
+    }
+
+    public List<Order> getActiveOrderListByUserId(String userId) {
+        OrderCriteria orderCriteria = new OrderCriteria();
+        orderCriteria.createCriteria()
+                .andUserIdEqualTo(userId)
+                .andIsExpiredNotEqualTo(true)
+                .andIsFinishedNotEqualTo(true);
+        orderCriteria.setOrderByClause("create_time desc");
+
+        return this.orderMapper.selectByExample(orderCriteria);
+    }
+
+    public List<Order> getExpiredOrderListByUserId(String userId) {
+        OrderCriteria orderCriteria = new OrderCriteria();
+        orderCriteria.createCriteria()
+                .andUserIdEqualTo(userId)
+                .andIsExpiredEqualTo(true);
+        orderCriteria.setOrderByClause("create_time desc");
+
+        return this.orderMapper.selectByExample(orderCriteria);
+    }
+
+    public List<Order> getFinishedOrderListByUserId(String userId) {
+        OrderCriteria orderCriteria = new OrderCriteria();
+        orderCriteria.createCriteria()
+                .andUserIdEqualTo(userId)
+                .andIsFinishedEqualTo(true);
         orderCriteria.setOrderByClause("create_time desc");
 
         return this.orderMapper.selectByExample(orderCriteria);
@@ -60,6 +114,10 @@ public class OrderService {
         return this.orderMapper.deleteByPrimaryKey(orderId);
     }
 
+    public int updateSelectiveOrder(Order order) {
+        return this.orderMapper.updateByPrimaryKeySelective(order);
+    }
+
     public int setOrderExpireTime(String orderId, int daysToExpire) {
 
         Order order = this.getOrder(orderId);
@@ -77,9 +135,9 @@ public class OrderService {
         return this.orderMapper.updateByPrimaryKeySelective(order);
     }
 
-    public int setOrderIsFinished(String orderId, boolean isFinished) {
+    public int setOrderIsFinished(String orderId) {
         Order order = this.getOrder(orderId);
-        order.setIsFinished(isFinished);
+        order.setIsFinished(true);
 
         return this.orderMapper.updateByPrimaryKeySelective(order);
     }
@@ -87,65 +145,9 @@ public class OrderService {
     public int setOrderIsConfirmed(String orderId, boolean isConfirmed) {
         Order order = this.getOrder(orderId);
         order.setIsConfirmed(isConfirmed);
-
         return this.orderMapper.updateByPrimaryKeySelective(order);
     }
-    public int setOrderExpressStation(String orderId, String expressStation) {
-        Order order = this.getOrder(orderId);
-        if (order.getExpressStation().equals(expressStation))
-            return 0;
-        else {
-            order.setExpressStation(expressStation);
-            return this.orderMapper.updateByPrimaryKeySelective(order);
-        }
-    }
 
-    public int setOrderExpressCompany(String orderId, String expressCompany) {
-        Order order = this.getOrder(orderId);
-        if (order.getExpressCompany().equals(expressCompany))
-            return 0;
-        else {
-            order.setExpressCompany(expressCompany);
-            return this.orderMapper.updateByPrimaryKeySelective(order);
-        }
-    }
-
-    public int setOrderShelfNumber(String orderId, String shelfNumber) {
-        Order order = this.getOrder(orderId);
-        if (order.getShelfNumber().equals(shelfNumber))
-            return 0;
-        else {
-            order.setShelfNumber(shelfNumber);
-            return this.orderMapper.updateByPrimaryKeySelective(order);
-        }
-    }
-
-
-    public int setOrderTrackingNumber(String orderId, String trackingNumber) {
-        Order order = this.getOrder(orderId);
-        String currentTrackingNumber = order.getTrackingNumber();
-        if (currentTrackingNumber == null && trackingNumber == null)
-            return 0;
-        else if (currentTrackingNumber != null && currentTrackingNumber.equals(trackingNumber))
-            return 0;
-        else {
-            order.setTrackingNumber(trackingNumber);
-            return this.orderMapper.updateByPrimaryKeySelective(order);
-        }
-    }
-
-    public int setOrderRemarks(String orderId, String remarks) {
-        Order order = this.getOrder(orderId);
-        String currentRemarks = order.getRemarks();
-        if (currentRemarks == null && remarks == null)
-            return 0;
-        else if (currentRemarks != null && order.getRemarks().equals(remarks))
-            return 0;
-        else {
-            order.setRemarks(remarks);
-            return this.orderMapper.updateByPrimaryKeySelective(order);
-        }
-    }
 
     public int setOrderOrderTakerId(String orderId, String orderTakerId) {
         Order order = this.getOrder(orderId);

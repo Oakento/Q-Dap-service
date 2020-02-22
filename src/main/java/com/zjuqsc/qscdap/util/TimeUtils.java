@@ -7,8 +7,7 @@ import java.util.Date;
 public class TimeUtils {
 
     public static boolean isExpired(Date expireTime) {
-        Date now = new Date();
-        return now.after(expireTime);
+        return new Date().after(expireTime);
     }
 
     public static Date addDays(Date currentTime, int daysToAdd){
@@ -17,8 +16,6 @@ public class TimeUtils {
         calendar.setTime(currentTime);
         calendar.add(Calendar.DATE, daysToAdd);
 
-        Date newTime = calendar.getTime();
-
-        return newTime;
+        return calendar.getTime();
     }
 }
