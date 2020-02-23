@@ -90,18 +90,6 @@ public class OrderService {
         return this.orderMapper.selectByExample(orderCriteria);
     }
 
-    public List<Order> getOrderByUserIdAndStatus(String userId, Boolean isExpired, Boolean isFinished) {
-        OrderCriteria orderCriteria = new OrderCriteria();
-        orderCriteria.createCriteria()
-                .andUserIdEqualTo(userId)
-                .andIsExpiredEqualTo(isExpired)
-                .andIsFinishedEqualTo(isFinished);
-        orderCriteria.setOrderByClause("create_time desc");
-
-        return this.orderMapper.selectByExample(orderCriteria);
-    }
-
-
     public Order getOrder(String orderId) {
         return this.orderMapper.selectByPrimaryKey(orderId);
     }
@@ -118,22 +106,6 @@ public class OrderService {
         return this.orderMapper.updateByPrimaryKeySelective(order);
     }
 
-    public int setOrderExpireTime(String orderId, int daysToExpire) {
-
-        Order order = this.getOrder(orderId);
-        order.setExpireTime(
-                TimeUtils.addDays(order.getCreateTime(), daysToExpire));
-
-        return this.orderMapper.updateByPrimaryKeySelective(order);
-    }
-
-    public int setOrderUpdateTime(String orderId) {
-        Date now = new Date();
-        Order order = this.getOrder(orderId);
-        order.setUpdateTime(now);
-
-        return this.orderMapper.updateByPrimaryKeySelective(order);
-    }
 
     public int setOrderIsFinished(String orderId) {
         Order order = this.getOrder(orderId);
@@ -154,10 +126,6 @@ public class OrderService {
         order.setOrderTakerId(orderTakerId);
 
         return this.orderMapper.updateByPrimaryKeySelective(order);
-    }
-
-    public String generateOrderId() {
-        return Long.toString(new SnowFlake(0, 0).nextId());
     }
 
 }

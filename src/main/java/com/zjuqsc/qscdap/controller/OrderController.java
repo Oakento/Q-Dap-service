@@ -3,6 +3,7 @@ package com.zjuqsc.qscdap.controller;
 
 import com.zjuqsc.qscdap.model.Order;
 import com.zjuqsc.qscdap.service.OrderService;
+import com.zjuqsc.qscdap.util.SnowFlake;
 import com.zjuqsc.qscdap.util.TimeUtils;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -30,7 +31,7 @@ public class OrderController {
             @ApiParam(required = true, value = "Express station") @RequestParam(required = true) String expressStation,
             @ApiParam(required = true, value = "Express company") @RequestParam(required = true) String expressCompany,
             @ApiParam(required = true, value = "Shelf number") @RequestParam(required = true) String shelfNumber,
-            @ApiParam(required = true, value = "Days to Expire") @RequestParam(required = true) String daysToExpire,
+            @ApiParam(required = false, value = "Hours to Expire") @RequestParam(required = false) String hourToExpire,
             @ApiParam(required = false, value = "Tracking number") @RequestParam(required = false) String trackingNumber,
             @ApiParam(required = false, value = "Remarks") @RequestParam(required = false) String remarks
     ) {
@@ -38,14 +39,14 @@ public class OrderController {
         Order order = new Order();
         HashMap<String, Object> map = new HashMap<>();
 
-        Pattern pattern = Pattern.compile("^[1-9]d*$");
-        Matcher matcher = pattern.matcher(daysToExpire);
+        Pattern pattern = Pattern.compile("^[1-9]\\d?$");
+        Matcher matcher = pattern.matcher(hourToExpire);
         if (!matcher.find()) {
             map.put("code", 0);
             map.put("message", "Days Input invalid");
             return map;
         }
-        order.setId(orderService.generateOrderId());
+        order.setId(Long.toString(new SnowFlake(0, 0).nextId()));
         order.setCreateTime(now);
         order.setIsExpired(false);
         order.setIsFinished(false);
@@ -53,7 +54,7 @@ public class OrderController {
         order.setExpressStation(expressStation);
         order.setExpressCompany(expressCompany);
         order.setShelfNumber(shelfNumber);
-        order.setExpireTime(TimeUtils.addDays(now, Integer.parseInt(daysToExpire)));
+        order.setExpireTime(TimeUtils.addDays(now, Integer.parseInt(hourToExpire)));
         order.setTrackingNumber(trackingNumber);
         order.setRemarks(remarks);
 
@@ -430,5 +431,7 @@ public class OrderController {
 
         return map;
     }
+
+
 
 }
