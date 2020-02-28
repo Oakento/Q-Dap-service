@@ -11,11 +11,13 @@ public class Order {
 
     private Date expireTime;
 
-    private Boolean isExpired;
+    private Boolean isTaken;
+
+    private Boolean isConfirmed;
 
     private Boolean isFinished;
 
-    private Boolean isConfirmed;
+    private Boolean isExpired;
 
     private String userId;
 
@@ -63,12 +65,20 @@ public class Order {
         this.expireTime = expireTime;
     }
 
-    public Boolean getIsExpired() {
-        return isExpired;
+    public Boolean getIsTaken() {
+        return isTaken;
     }
 
-    public void setIsExpired(Boolean isExpired) {
-        this.isExpired = isExpired;
+    public void setIsTaken(Boolean isTaken) {
+        this.isTaken = isTaken;
+    }
+
+    public Boolean getIsConfirmed() {
+        return isConfirmed;
+    }
+
+    public void setIsConfirmed(Boolean isConfirmed) {
+        this.isConfirmed = isConfirmed;
     }
 
     public Boolean getIsFinished() {
@@ -79,12 +89,12 @@ public class Order {
         this.isFinished = isFinished;
     }
 
-    public Boolean getIsConfirmed() {
-        return isConfirmed;
+    public Boolean getIsExpired() {
+        return isExpired;
     }
 
-    public void setIsConfirmed(Boolean isConfirmed) {
-        this.isConfirmed = isConfirmed;
+    public void setIsExpired(Boolean isExpired) {
+        this.isExpired = isExpired;
     }
 
     public String getUserId() {

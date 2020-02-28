@@ -44,16 +44,20 @@ public class OrderSqlProvider {
             sql.VALUES("expire_time", "#{expireTime,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getIsExpired() != null) {
-            sql.VALUES("is_expired", "#{isExpired,jdbcType=BIT}");
+        if (record.getIsTaken() != null) {
+            sql.VALUES("is_taken", "#{isTaken,jdbcType=BIT}");
+        }
+        
+        if (record.getIsConfirmed() != null) {
+            sql.VALUES("is_confirmed", "#{isConfirmed,jdbcType=BIT}");
         }
         
         if (record.getIsFinished() != null) {
             sql.VALUES("is_finished", "#{isFinished,jdbcType=BIT}");
         }
         
-        if (record.getIsConfirmed() != null) {
-            sql.VALUES("is_confirmed", "#{isConfirmed,jdbcType=BIT}");
+        if (record.getIsExpired() != null) {
+            sql.VALUES("is_expired", "#{isExpired,jdbcType=BIT}");
         }
         
         if (record.getUserId() != null) {
@@ -97,9 +101,10 @@ public class OrderSqlProvider {
         sql.SELECT("create_time");
         sql.SELECT("update_time");
         sql.SELECT("expire_time");
-        sql.SELECT("is_expired");
-        sql.SELECT("is_finished");
+        sql.SELECT("is_taken");
         sql.SELECT("is_confirmed");
+        sql.SELECT("is_finished");
+        sql.SELECT("is_expired");
         sql.SELECT("user_id");
         sql.SELECT("express_station");
         sql.SELECT("express_company");
@@ -140,16 +145,20 @@ public class OrderSqlProvider {
             sql.SET("expire_time = #{record.expireTime,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getIsExpired() != null) {
-            sql.SET("is_expired = #{record.isExpired,jdbcType=BIT}");
+        if (record.getIsTaken() != null) {
+            sql.SET("is_taken = #{record.isTaken,jdbcType=BIT}");
+        }
+        
+        if (record.getIsConfirmed() != null) {
+            sql.SET("is_confirmed = #{record.isConfirmed,jdbcType=BIT}");
         }
         
         if (record.getIsFinished() != null) {
             sql.SET("is_finished = #{record.isFinished,jdbcType=BIT}");
         }
         
-        if (record.getIsConfirmed() != null) {
-            sql.SET("is_confirmed = #{record.isConfirmed,jdbcType=BIT}");
+        if (record.getIsExpired() != null) {
+            sql.SET("is_expired = #{record.isExpired,jdbcType=BIT}");
         }
         
         if (record.getUserId() != null) {
@@ -192,9 +201,10 @@ public class OrderSqlProvider {
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("expire_time = #{record.expireTime,jdbcType=TIMESTAMP}");
-        sql.SET("is_expired = #{record.isExpired,jdbcType=BIT}");
-        sql.SET("is_finished = #{record.isFinished,jdbcType=BIT}");
+        sql.SET("is_taken = #{record.isTaken,jdbcType=BIT}");
         sql.SET("is_confirmed = #{record.isConfirmed,jdbcType=BIT}");
+        sql.SET("is_finished = #{record.isFinished,jdbcType=BIT}");
+        sql.SET("is_expired = #{record.isExpired,jdbcType=BIT}");
         sql.SET("user_id = #{record.userId,jdbcType=VARCHAR}");
         sql.SET("express_station = #{record.expressStation,jdbcType=VARCHAR}");
         sql.SET("express_company = #{record.expressCompany,jdbcType=VARCHAR}");
@@ -224,16 +234,20 @@ public class OrderSqlProvider {
             sql.SET("expire_time = #{expireTime,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getIsExpired() != null) {
-            sql.SET("is_expired = #{isExpired,jdbcType=BIT}");
+        if (record.getIsTaken() != null) {
+            sql.SET("is_taken = #{isTaken,jdbcType=BIT}");
+        }
+        
+        if (record.getIsConfirmed() != null) {
+            sql.SET("is_confirmed = #{isConfirmed,jdbcType=BIT}");
         }
         
         if (record.getIsFinished() != null) {
             sql.SET("is_finished = #{isFinished,jdbcType=BIT}");
         }
         
-        if (record.getIsConfirmed() != null) {
-            sql.SET("is_confirmed = #{isConfirmed,jdbcType=BIT}");
+        if (record.getIsExpired() != null) {
+            sql.SET("is_expired = #{isExpired,jdbcType=BIT}");
         }
         
         if (record.getUserId() != null) {

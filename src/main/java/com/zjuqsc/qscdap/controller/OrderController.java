@@ -335,7 +335,7 @@ public class OrderController {
             map.put("message", "Not permitted");
             return map;
         }
-
+        this.orderService.setOrderIsTaken(orderId, true);
         int code = this.orderService.setOrderOrderTakerId(orderId, userId);
         String message = (code > 0) ? "success" : "failed";
         order = this.orderService.getOrder(orderId);

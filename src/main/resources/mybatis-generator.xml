@@ -46,6 +46,7 @@
 
         <table tableName="cls_order" domainObjectName="Order"/>
         <table tableName="cls_user" domainObjectName="User"/>
+        <table tableName="order_notice" domainObjectName="OrderNotice"/>
 
     </context>
 </generatorConfiguration>

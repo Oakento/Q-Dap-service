@@ -1,78 +1,78 @@
 package com.zjuqsc.qscdap.mapper;
 
-import com.zjuqsc.qscdap.model.User;
-import com.zjuqsc.qscdap.model.UserCriteria.Criteria;
-import com.zjuqsc.qscdap.model.UserCriteria.Criterion;
-import com.zjuqsc.qscdap.model.UserCriteria;
+import com.zjuqsc.qscdap.model.OrderNotice;
+import com.zjuqsc.qscdap.model.OrderNoticeCriteria.Criteria;
+import com.zjuqsc.qscdap.model.OrderNoticeCriteria.Criterion;
+import com.zjuqsc.qscdap.model.OrderNoticeCriteria;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
 
-public class UserSqlProvider {
+public class OrderNoticeSqlProvider {
 
-    public String countByExample(UserCriteria example) {
+    public String countByExample(OrderNoticeCriteria example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("cls_user");
+        sql.SELECT("count(*)").FROM("order_notice");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(UserCriteria example) {
+    public String deleteByExample(OrderNoticeCriteria example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("cls_user");
+        sql.DELETE_FROM("order_notice");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(User record) {
+    public String insertSelective(OrderNotice record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("cls_user");
+        sql.INSERT_INTO("order_notice");
         
         if (record.getId() != null) {
             sql.VALUES("id", "#{id,jdbcType=VARCHAR}");
         }
         
-        if (record.getName() != null) {
-            sql.VALUES("name", "#{name,jdbcType=VARCHAR}");
+        if (record.getType() != null) {
+            sql.VALUES("type", "#{type,jdbcType=VARCHAR}");
         }
         
-        if (record.getBbsName() != null) {
-            sql.VALUES("bbs_name", "#{bbsName,jdbcType=VARCHAR}");
+        if (record.getCreateTime() != null) {
+            sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getCardId() != null) {
-            sql.VALUES("card_id", "#{cardId,jdbcType=VARCHAR}");
+        if (record.getOrderId() != null) {
+            sql.VALUES("order_id", "#{orderId,jdbcType=VARCHAR}");
         }
         
-        if (record.getTelephone() != null) {
-            sql.VALUES("telephone", "#{telephone,jdbcType=VARCHAR}");
+        if (record.getMainUserId() != null) {
+            sql.VALUES("main_user_id", "#{mainUserId,jdbcType=VARCHAR}");
         }
         
-        if (record.getCardPhoto() != null) {
-            sql.VALUES("card_photo", "#{cardPhoto,jdbcType=VARCHAR}");
+        if (record.getSubUserId() != null) {
+            sql.VALUES("sub_user_id", "#{subUserId,jdbcType=VARCHAR}");
         }
         
-        if (record.getToken() != null) {
-            sql.VALUES("token", "#{token,jdbcType=VARCHAR}");
+        if (record.getIsRead() != null) {
+            sql.VALUES("is_read", "#{isRead,jdbcType=BIT}");
         }
         
         return sql.toString();
     }
 
-    public String selectByExample(UserCriteria example) {
+    public String selectByExample(OrderNoticeCriteria example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("id");
         } else {
             sql.SELECT("id");
         }
-        sql.SELECT("name");
-        sql.SELECT("bbs_name");
-        sql.SELECT("card_id");
-        sql.SELECT("telephone");
-        sql.SELECT("card_photo");
-        sql.SELECT("token");
-        sql.FROM("cls_user");
+        sql.SELECT("type");
+        sql.SELECT("create_time");
+        sql.SELECT("order_id");
+        sql.SELECT("main_user_id");
+        sql.SELECT("sub_user_id");
+        sql.SELECT("is_read");
+        sql.FROM("order_notice");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -83,38 +83,38 @@ public class UserSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        User record = (User) parameter.get("record");
-        UserCriteria example = (UserCriteria) parameter.get("example");
+        OrderNotice record = (OrderNotice) parameter.get("record");
+        OrderNoticeCriteria example = (OrderNoticeCriteria) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("cls_user");
+        sql.UPDATE("order_notice");
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=VARCHAR}");
         }
         
-        if (record.getName() != null) {
-            sql.SET("name = #{record.name,jdbcType=VARCHAR}");
+        if (record.getType() != null) {
+            sql.SET("type = #{record.type,jdbcType=VARCHAR}");
         }
         
-        if (record.getBbsName() != null) {
-            sql.SET("bbs_name = #{record.bbsName,jdbcType=VARCHAR}");
+        if (record.getCreateTime() != null) {
+            sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getCardId() != null) {
-            sql.SET("card_id = #{record.cardId,jdbcType=VARCHAR}");
+        if (record.getOrderId() != null) {
+            sql.SET("order_id = #{record.orderId,jdbcType=VARCHAR}");
         }
         
-        if (record.getTelephone() != null) {
-            sql.SET("telephone = #{record.telephone,jdbcType=VARCHAR}");
+        if (record.getMainUserId() != null) {
+            sql.SET("main_user_id = #{record.mainUserId,jdbcType=VARCHAR}");
         }
         
-        if (record.getCardPhoto() != null) {
-            sql.SET("card_photo = #{record.cardPhoto,jdbcType=VARCHAR}");
+        if (record.getSubUserId() != null) {
+            sql.SET("sub_user_id = #{record.subUserId,jdbcType=VARCHAR}");
         }
         
-        if (record.getToken() != null) {
-            sql.SET("token = #{record.token,jdbcType=VARCHAR}");
+        if (record.getIsRead() != null) {
+            sql.SET("is_read = #{record.isRead,jdbcType=BIT}");
         }
         
         applyWhere(sql, example, true);
@@ -123,47 +123,47 @@ public class UserSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("cls_user");
+        sql.UPDATE("order_notice");
         
         sql.SET("id = #{record.id,jdbcType=VARCHAR}");
-        sql.SET("name = #{record.name,jdbcType=VARCHAR}");
-        sql.SET("bbs_name = #{record.bbsName,jdbcType=VARCHAR}");
-        sql.SET("card_id = #{record.cardId,jdbcType=VARCHAR}");
-        sql.SET("telephone = #{record.telephone,jdbcType=VARCHAR}");
-        sql.SET("card_photo = #{record.cardPhoto,jdbcType=VARCHAR}");
-        sql.SET("token = #{record.token,jdbcType=VARCHAR}");
+        sql.SET("type = #{record.type,jdbcType=VARCHAR}");
+        sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
+        sql.SET("order_id = #{record.orderId,jdbcType=VARCHAR}");
+        sql.SET("main_user_id = #{record.mainUserId,jdbcType=VARCHAR}");
+        sql.SET("sub_user_id = #{record.subUserId,jdbcType=VARCHAR}");
+        sql.SET("is_read = #{record.isRead,jdbcType=BIT}");
         
-        UserCriteria example = (UserCriteria) parameter.get("example");
+        OrderNoticeCriteria example = (OrderNoticeCriteria) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    public String updateByPrimaryKeySelective(User record) {
+    public String updateByPrimaryKeySelective(OrderNotice record) {
         SQL sql = new SQL();
-        sql.UPDATE("cls_user");
+        sql.UPDATE("order_notice");
         
-        if (record.getName() != null) {
-            sql.SET("name = #{name,jdbcType=VARCHAR}");
+        if (record.getType() != null) {
+            sql.SET("type = #{type,jdbcType=VARCHAR}");
         }
         
-        if (record.getBbsName() != null) {
-            sql.SET("bbs_name = #{bbsName,jdbcType=VARCHAR}");
+        if (record.getCreateTime() != null) {
+            sql.SET("create_time = #{createTime,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getCardId() != null) {
-            sql.SET("card_id = #{cardId,jdbcType=VARCHAR}");
+        if (record.getOrderId() != null) {
+            sql.SET("order_id = #{orderId,jdbcType=VARCHAR}");
         }
         
-        if (record.getTelephone() != null) {
-            sql.SET("telephone = #{telephone,jdbcType=VARCHAR}");
+        if (record.getMainUserId() != null) {
+            sql.SET("main_user_id = #{mainUserId,jdbcType=VARCHAR}");
         }
         
-        if (record.getCardPhoto() != null) {
-            sql.SET("card_photo = #{cardPhoto,jdbcType=VARCHAR}");
+        if (record.getSubUserId() != null) {
+            sql.SET("sub_user_id = #{subUserId,jdbcType=VARCHAR}");
         }
         
-        if (record.getToken() != null) {
-            sql.SET("token = #{token,jdbcType=VARCHAR}");
+        if (record.getIsRead() != null) {
+            sql.SET("is_read = #{isRead,jdbcType=BIT}");
         }
         
         sql.WHERE("id = #{id,jdbcType=VARCHAR}");
@@ -171,7 +171,7 @@ public class UserSqlProvider {
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, UserCriteria example, boolean includeExamplePhrase) {
+    protected void applyWhere(SQL sql, OrderNoticeCriteria example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

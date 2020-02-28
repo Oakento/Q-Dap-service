@@ -3,13 +3,17 @@ package com.zjuqsc.qscdap.model;
 public class User {
     private String id;
 
-    private String nickName;
-
     private String name;
+
+    private String bbsName;
 
     private String cardId;
 
-    private String phoneNumber;
+    private String telephone;
+
+    private String cardPhoto;
+
+    private String token;
 
     public String getId() {
         return id;
@@ -17,14 +21,6 @@ public class User {
 
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName == null ? null : nickName.trim();
     }
 
     public String getName() {
@@ -35,6 +31,14 @@ public class User {
         this.name = name == null ? null : name.trim();
     }
 
+    public String getBbsName() {
+        return bbsName;
+    }
+
+    public void setBbsName(String bbsName) {
+        this.bbsName = bbsName == null ? null : bbsName.trim();
+    }
+
     public String getCardId() {
         return cardId;
     }
@@ -43,11 +47,27 @@ public class User {
         this.cardId = cardId == null ? null : cardId.trim();
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber == null ? null : phoneNumber.trim();
+    public void setTelephone(String telephone) {
+        this.telephone = telephone == null ? null : telephone.trim();
+    }
+
+    public String getCardPhoto() {
+        return cardPhoto;
+    }
+
+    public void setCardPhoto(String cardPhoto) {
+        this.cardPhoto = cardPhoto == null ? null : cardPhoto.trim();
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token == null ? null : token.trim();
     }
 }

@@ -30,10 +30,14 @@ public interface UserMapper {
     int deleteByPrimaryKey(String id);
 
     @Insert({
-        "insert into cls_user (id, nick_name, ",
-        "name, card_id, phone_number)",
-        "values (#{id,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, ",
-        "#{name,jdbcType=VARCHAR}, #{cardId,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR})"
+        "insert into cls_user (id, name, ",
+        "bbs_name, card_id, ",
+        "telephone, card_photo, ",
+        "token)",
+        "values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, ",
+        "#{bbsName,jdbcType=VARCHAR}, #{cardId,jdbcType=VARCHAR}, ",
+        "#{telephone,jdbcType=VARCHAR}, #{cardPhoto,jdbcType=VARCHAR}, ",
+        "#{token,jdbcType=VARCHAR})"
     })
     int insert(User record);
 
@@ -43,25 +47,29 @@ public interface UserMapper {
     @SelectProvider(type=UserSqlProvider.class, method="selectByExample")
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
-        @Result(column="nick_name", property="nickName", jdbcType=JdbcType.VARCHAR),
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="bbs_name", property="bbsName", jdbcType=JdbcType.VARCHAR),
         @Result(column="card_id", property="cardId", jdbcType=JdbcType.VARCHAR),
-        @Result(column="phone_number", property="phoneNumber", jdbcType=JdbcType.VARCHAR)
+        @Result(column="telephone", property="telephone", jdbcType=JdbcType.VARCHAR),
+        @Result(column="card_photo", property="cardPhoto", jdbcType=JdbcType.VARCHAR),
+        @Result(column="token", property="token", jdbcType=JdbcType.VARCHAR)
     })
     List<User> selectByExample(UserCriteria example);
 
     @Select({
         "select",
-        "id, nick_name, name, card_id, phone_number",
+        "id, name, bbs_name, card_id, telephone, card_photo, token",
         "from cls_user",
         "where id = #{id,jdbcType=VARCHAR}"
     })
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
-        @Result(column="nick_name", property="nickName", jdbcType=JdbcType.VARCHAR),
         @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="bbs_name", property="bbsName", jdbcType=JdbcType.VARCHAR),
         @Result(column="card_id", property="cardId", jdbcType=JdbcType.VARCHAR),
-        @Result(column="phone_number", property="phoneNumber", jdbcType=JdbcType.VARCHAR)
+        @Result(column="telephone", property="telephone", jdbcType=JdbcType.VARCHAR),
+        @Result(column="card_photo", property="cardPhoto", jdbcType=JdbcType.VARCHAR),
+        @Result(column="token", property="token", jdbcType=JdbcType.VARCHAR)
     })
     User selectByPrimaryKey(String id);
 
@@ -76,10 +84,12 @@ public interface UserMapper {
 
     @Update({
         "update cls_user",
-        "set nick_name = #{nickName,jdbcType=VARCHAR},",
-          "name = #{name,jdbcType=VARCHAR},",
+        "set name = #{name,jdbcType=VARCHAR},",
+          "bbs_name = #{bbsName,jdbcType=VARCHAR},",
           "card_id = #{cardId,jdbcType=VARCHAR},",
-          "phone_number = #{phoneNumber,jdbcType=VARCHAR}",
+          "telephone = #{telephone,jdbcType=VARCHAR},",
+          "card_photo = #{cardPhoto,jdbcType=VARCHAR},",
+          "token = #{token,jdbcType=VARCHAR}",
         "where id = #{id,jdbcType=VARCHAR}"
     })
     int updateByPrimaryKey(User record);

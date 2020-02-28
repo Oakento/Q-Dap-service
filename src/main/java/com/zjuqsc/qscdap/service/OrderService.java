@@ -9,7 +9,6 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
 import java.util.List;
 
 @Component
@@ -120,6 +119,11 @@ public class OrderService {
         return this.orderMapper.updateByPrimaryKeySelective(order);
     }
 
+    public int setOrderIsTaken(String orderId, boolean isTaken) {
+        Order order = this.getOrder(orderId);
+        order.setIsTaken(isTaken);
+        return this.orderMapper.updateByPrimaryKeySelective(order);
+    }
 
     public int setOrderOrderTakerId(String orderId, String orderTakerId) {
         Order order = this.getOrder(orderId);

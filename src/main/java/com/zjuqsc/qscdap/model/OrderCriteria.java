@@ -355,63 +355,123 @@ public class OrderCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andIsExpiredIsNull() {
-            addCriterion("is_expired is null");
+        public Criteria andIsTakenIsNull() {
+            addCriterion("is_taken is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsExpiredIsNotNull() {
-            addCriterion("is_expired is not null");
+        public Criteria andIsTakenIsNotNull() {
+            addCriterion("is_taken is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsExpiredEqualTo(Boolean value) {
-            addCriterion("is_expired =", value, "isExpired");
+        public Criteria andIsTakenEqualTo(Boolean value) {
+            addCriterion("is_taken =", value, "isTaken");
             return (Criteria) this;
         }
 
-        public Criteria andIsExpiredNotEqualTo(Boolean value) {
-            addCriterion("is_expired <>", value, "isExpired");
+        public Criteria andIsTakenNotEqualTo(Boolean value) {
+            addCriterion("is_taken <>", value, "isTaken");
             return (Criteria) this;
         }
 
-        public Criteria andIsExpiredGreaterThan(Boolean value) {
-            addCriterion("is_expired >", value, "isExpired");
+        public Criteria andIsTakenGreaterThan(Boolean value) {
+            addCriterion("is_taken >", value, "isTaken");
             return (Criteria) this;
         }
 
-        public Criteria andIsExpiredGreaterThanOrEqualTo(Boolean value) {
-            addCriterion("is_expired >=", value, "isExpired");
+        public Criteria andIsTakenGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("is_taken >=", value, "isTaken");
             return (Criteria) this;
         }
 
-        public Criteria andIsExpiredLessThan(Boolean value) {
-            addCriterion("is_expired <", value, "isExpired");
+        public Criteria andIsTakenLessThan(Boolean value) {
+            addCriterion("is_taken <", value, "isTaken");
             return (Criteria) this;
         }
 
-        public Criteria andIsExpiredLessThanOrEqualTo(Boolean value) {
-            addCriterion("is_expired <=", value, "isExpired");
+        public Criteria andIsTakenLessThanOrEqualTo(Boolean value) {
+            addCriterion("is_taken <=", value, "isTaken");
             return (Criteria) this;
         }
 
-        public Criteria andIsExpiredIn(List<Boolean> values) {
-            addCriterion("is_expired in", values, "isExpired");
+        public Criteria andIsTakenIn(List<Boolean> values) {
+            addCriterion("is_taken in", values, "isTaken");
             return (Criteria) this;
         }
 
-        public Criteria andIsExpiredNotIn(List<Boolean> values) {
-            addCriterion("is_expired not in", values, "isExpired");
+        public Criteria andIsTakenNotIn(List<Boolean> values) {
+            addCriterion("is_taken not in", values, "isTaken");
             return (Criteria) this;
         }
 
-        public Criteria andIsExpiredBetween(Boolean value1, Boolean value2) {
-            addCriterion("is_expired between", value1, value2, "isExpired");
+        public Criteria andIsTakenBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_taken between", value1, value2, "isTaken");
             return (Criteria) this;
         }
 
-        public Criteria andIsExpiredNotBetween(Boolean value1, Boolean value2) {
-            addCriterion("is_expired not between", value1, value2, "isExpired");
+        public Criteria andIsTakenNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_taken not between", value1, value2, "isTaken");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedIsNull() {
+            addCriterion("is_confirmed is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedIsNotNull() {
+            addCriterion("is_confirmed is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedEqualTo(Boolean value) {
+            addCriterion("is_confirmed =", value, "isConfirmed");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedNotEqualTo(Boolean value) {
+            addCriterion("is_confirmed <>", value, "isConfirmed");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedGreaterThan(Boolean value) {
+            addCriterion("is_confirmed >", value, "isConfirmed");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("is_confirmed >=", value, "isConfirmed");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedLessThan(Boolean value) {
+            addCriterion("is_confirmed <", value, "isConfirmed");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedLessThanOrEqualTo(Boolean value) {
+            addCriterion("is_confirmed <=", value, "isConfirmed");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedIn(List<Boolean> values) {
+            addCriterion("is_confirmed in", values, "isConfirmed");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedNotIn(List<Boolean> values) {
+            addCriterion("is_confirmed not in", values, "isConfirmed");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_confirmed between", value1, value2, "isConfirmed");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsConfirmedNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_confirmed not between", value1, value2, "isConfirmed");
             return (Criteria) this;
         }
 
@@ -475,63 +535,63 @@ public class OrderCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andIsConfirmedIsNull() {
-            addCriterion("is_confirmed is null");
+        public Criteria andIsExpiredIsNull() {
+            addCriterion("is_expired is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsConfirmedIsNotNull() {
-            addCriterion("is_confirmed is not null");
+        public Criteria andIsExpiredIsNotNull() {
+            addCriterion("is_expired is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsConfirmedEqualTo(Boolean value) {
-            addCriterion("is_confirmed =", value, "isConfirmed");
+        public Criteria andIsExpiredEqualTo(Boolean value) {
+            addCriterion("is_expired =", value, "isExpired");
             return (Criteria) this;
         }
 
-        public Criteria andIsConfirmedNotEqualTo(Boolean value) {
-            addCriterion("is_confirmed <>", value, "isConfirmed");
+        public Criteria andIsExpiredNotEqualTo(Boolean value) {
+            addCriterion("is_expired <>", value, "isExpired");
             return (Criteria) this;
         }
 
-        public Criteria andIsConfirmedGreaterThan(Boolean value) {
-            addCriterion("is_confirmed >", value, "isConfirmed");
+        public Criteria andIsExpiredGreaterThan(Boolean value) {
+            addCriterion("is_expired >", value, "isExpired");
             return (Criteria) this;
         }
 
-        public Criteria andIsConfirmedGreaterThanOrEqualTo(Boolean value) {
-            addCriterion("is_confirmed >=", value, "isConfirmed");
+        public Criteria andIsExpiredGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("is_expired >=", value, "isExpired");
             return (Criteria) this;
         }
 
-        public Criteria andIsConfirmedLessThan(Boolean value) {
-            addCriterion("is_confirmed <", value, "isConfirmed");
+        public Criteria andIsExpiredLessThan(Boolean value) {
+            addCriterion("is_expired <", value, "isExpired");
             return (Criteria) this;
         }
 
-        public Criteria andIsConfirmedLessThanOrEqualTo(Boolean value) {
-            addCriterion("is_confirmed <=", value, "isConfirmed");
+        public Criteria andIsExpiredLessThanOrEqualTo(Boolean value) {
+            addCriterion("is_expired <=", value, "isExpired");
             return (Criteria) this;
         }
 
-        public Criteria andIsConfirmedIn(List<Boolean> values) {
-            addCriterion("is_confirmed in", values, "isConfirmed");
+        public Criteria andIsExpiredIn(List<Boolean> values) {
+            addCriterion("is_expired in", values, "isExpired");
             return (Criteria) this;
         }
 
-        public Criteria andIsConfirmedNotIn(List<Boolean> values) {
-            addCriterion("is_confirmed not in", values, "isConfirmed");
+        public Criteria andIsExpiredNotIn(List<Boolean> values) {
+            addCriterion("is_expired not in", values, "isExpired");
             return (Criteria) this;
         }
 
-        public Criteria andIsConfirmedBetween(Boolean value1, Boolean value2) {
-            addCriterion("is_confirmed between", value1, value2, "isConfirmed");
+        public Criteria andIsExpiredBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_expired between", value1, value2, "isExpired");
             return (Criteria) this;
         }
 
-        public Criteria andIsConfirmedNotBetween(Boolean value1, Boolean value2) {
-            addCriterion("is_confirmed not between", value1, value2, "isConfirmed");
+        public Criteria andIsExpiredNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_expired not between", value1, value2, "isExpired");
             return (Criteria) this;
         }
 
