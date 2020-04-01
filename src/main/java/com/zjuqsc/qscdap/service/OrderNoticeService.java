@@ -16,13 +16,16 @@ public class OrderNoticeService {
     @Autowired
     OrderNoticeMapper orderNoticeMapper;
 
-    public List<OrderNotice> getOrderNoticeByMainUserId(String userId) {
+    public List<OrderNotice> getOrderNoticeByUserId(String userId) {
         OrderNoticeCriteria orderNoticeCriteria = new OrderNoticeCriteria();
         orderNoticeCriteria.createCriteria().andMainUserIdEqualTo(userId);
+        orderNoticeCriteria.or().andSubUserIdEqualTo(userId);
         orderNoticeCriteria.setOrderByClause("create_time desc");
 
         return  this.orderNoticeMapper.selectByExample(orderNoticeCriteria);
     }
+
+
 
     public OrderNotice getOrderNotice(String orderNoticeId) {
         return this.orderNoticeMapper.selectByPrimaryKey(orderNoticeId);
@@ -37,4 +40,9 @@ public class OrderNoticeService {
         orderNotice.setIsRead(isRead);
         return this.orderNoticeMapper.updateByPrimaryKeySelective(orderNotice);
     }
+
+    public int deleteOrderNotice(String orderNoticeId) {
+        return this.orderNoticeMapper.deleteByPrimaryKey(orderNoticeId);
+    }
+
 }
